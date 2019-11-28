@@ -5,6 +5,7 @@ import javax.swing.UIManager;
 
 public class Principal extends javax.swing.JFrame {
 
+    //inicia los componentes de la interfaz
     /**
      * Creates new form Principal
      */
@@ -101,8 +102,11 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //declara una instancia de InventariosFrame
     InventariosFrame inventario;
+    //acción del botón Inventario
     private void btnInventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventariosActionPerformed
+        //si ya existe o no la instancia de del InventarioFrame
         if(inventario==null){
             inventario = new InventariosFrame();
             contenedorModulos.add(inventario);
@@ -115,6 +119,7 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnInventariosActionPerformed
 
+    //equivalente para el VentasFrame
     VentasFrame ventas;
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         if(ventas == null){
@@ -133,6 +138,7 @@ public class Principal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        //bloques de try catch
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -152,7 +158,7 @@ public class Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        //arreglado portabilidad de librerias
+        //llamada a la ejecución 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
