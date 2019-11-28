@@ -1,6 +1,7 @@
 
 package FISI.GUI;
 
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 public class Principal extends javax.swing.JFrame {
@@ -29,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
         contenedorModulos = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         grupoModulos.add(btnInventarios);
         btnInventarios.setText("Inventarios");
@@ -160,6 +162,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         //llamada a la ejecución 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Principal().setVisible(true);
             }
