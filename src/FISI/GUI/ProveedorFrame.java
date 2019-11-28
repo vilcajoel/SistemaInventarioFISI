@@ -142,19 +142,32 @@ public class ProveedorFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        int clave = Integer.parseInt(campoClave.getText());
-        String nombre = campoNombre.getText();
-        String direccion = campoDireccion.getText();
-        String telefono = campoTelefono.getText();
-        String email = campoEmail.getText();
-        String contacto = campoContacto.getText();
+        int clave = 0;
+        String nombre = null;
+        String direccion = null;
+        String telefono = null;
+        String email = null;
+        String contacto = null;
+        try {
+            clave = Integer.parseInt(campoClave.getText());
+            nombre = campoNombre.getText();
+            direccion = campoDireccion.getText();
+            telefono = campoTelefono.getText();
+            email = campoEmail.getText();
+            contacto = campoContacto.getText();
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(this, "Algo salio mal");
+            this.dispose();
+        }
         
-        Proveedor proveedor = new Proveedor(clave, nombre, direccion, telefono, email, contacto);
-        
-        base.insertarProveedor(proveedor);
-        JOptionPane.showMessageDialog(this, "El proveedor se guardó correctamente");
-        this.dispose();
-        
+        if(clave != 0){
+            Proveedor proveedor = new Proveedor(clave, nombre, direccion, telefono, email, contacto);
+
+            base.insertarProveedor(proveedor);
+            JOptionPane.showMessageDialog(this, "El proveedor se guardó correctamente");
+
+            this.dispose();
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

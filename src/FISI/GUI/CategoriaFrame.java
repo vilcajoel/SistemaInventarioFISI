@@ -103,12 +103,16 @@ public class CategoriaFrame extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String nombre = campoNombre.getText();
         String descripcion = campoDesc.getText();
-        
-        CategoriaProd categoria = new CategoriaProd(0, nombre, descripcion);
-        
-        base.insertarCategoriaProducto(categoria);
-        JOptionPane.showMessageDialog(this, "Se realizó correctamente la inserción de categoria");
-        this.dispose();
+        if("".equals(nombre)){
+            JOptionPane.showMessageDialog(this, "La categoria no puede tener un nombre vacio");          
+        }
+        else{
+            CategoriaProd categoria = new CategoriaProd(0, nombre, descripcion);
+
+            base.insertarCategoriaProducto(categoria);
+            JOptionPane.showMessageDialog(this, "Se realizó correctamente la inserción de categoria"); 
+            this.dispose();
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
