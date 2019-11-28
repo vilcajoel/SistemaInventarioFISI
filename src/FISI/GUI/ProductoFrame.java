@@ -364,30 +364,36 @@ public class ProductoFrame extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "No ha elegido una fotografía de producto");
             }
             else{
-                Producto producto = new Producto(codigo, nombre, descripcion, 
+                if(stock<1){
+                    JOptionPane.showMessageDialog(this, "No hay stock existente");
+                }
+                else{
+                    Producto producto = new Producto(codigo, nombre, descripcion, 
                     stock, imgArticleFile, unidad, precioCompra, precioVenta, 
                     0.0, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
+                    base.insertarProducto(producto);
 
-                base.insertarProducto(producto);
-
-                JOptionPane.showMessageDialog(this, "Se ha guardado el producto");
-                this.dispose();
+                    JOptionPane.showMessageDialog(this, "Se ha guardado el producto");
+                    this.dispose();
+                }
             }
-        }else{
-            
             
             if(imgArticleFile == null ){
                 JOptionPane.showMessageDialog(this, "No ha elegido una fotografía de producto");
             }
             else{
-                Producto producto = new Producto(codigo, nombre, descripcion, 
+                if(stock<1){
+                    JOptionPane.showMessageDialog(this, "No hay stock existente");
+                }
+                else{
+                    Producto producto = new Producto(codigo, nombre, descripcion, 
                     stock, imgArticleFile, unidad, precioCompra, precioVenta, 
                     0.0, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
+                    base.insertarProducto(producto);
 
-                base.insertarProducto(producto);
-
-                JOptionPane.showMessageDialog(this, "Se ha guardado el producto");
-                this.dispose();
+                    JOptionPane.showMessageDialog(this, "Se ha guardado el producto");
+                    this.dispose();
+                }
             }
         }
     }//GEN-LAST:event_btnGuardarProductoActionPerformed
@@ -439,6 +445,7 @@ public class ProductoFrame extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                //inicialicamos un producto y seteamos en no actualizado
                 ProductoFrame dialog = new ProductoFrame(new javax.swing.JFrame(), true, null, null, null, false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
