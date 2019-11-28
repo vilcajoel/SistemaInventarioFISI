@@ -394,8 +394,12 @@ public class VentasFrame extends javax.swing.JInternalFrame {
             double cantidad = Double.parseDouble(cantidadStr);
             DetalleVenta detalle = new DetalleVenta(idVenta, idProducto, cantidad);
             base.insertarDetalleVenta(detalle);
-            
             detalles.add(detalle);
+            ArrayList<Producto> listaDeUnProducto =base.obtenerProductosPorCriterio(idProducto);
+            Producto elProducto=listaDeUnProducto.get(0);
+            double existencia=elProducto.getExistenciasProducto();
+            existencia= existencia-1;
+            base.actualizarInventario(elProducto, existencia);
         }
         
         for (int i = numRows-1; i >= 0; i--) {
