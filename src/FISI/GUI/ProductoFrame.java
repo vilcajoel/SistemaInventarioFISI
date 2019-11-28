@@ -13,6 +13,7 @@ import FISI.DATOS.BaseDatos;
 import FISI.OBJETOS.CategoriaProd;
 import FISI.OBJETOS.Producto;
 import FISI.OBJETOS.Proveedor;
+import javax.swing.JDialog;
 
 public class ProductoFrame extends javax.swing.JDialog {
     
@@ -110,10 +111,10 @@ public class ProductoFrame extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         campoStock = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        comboCategorias = new javax.swing.JComboBox<CategoriaProd>();
+        comboCategorias = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        comboUnidades = new javax.swing.JComboBox<String>();
+        comboUnidades = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         campoPrecioCompra = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -121,7 +122,7 @@ public class ProductoFrame extends javax.swing.JDialog {
         btnGuardarProducto = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        comboProveedores = new javax.swing.JComboBox<Proveedor>();
+        comboProveedores = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         lblImagenArticulo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -144,10 +145,15 @@ public class ProductoFrame extends javax.swing.JDialog {
         comboCategorias.setModel(modeloCategorias);
 
         jButton1.setText("Nueva Categoria");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Unidad de medida:");
 
-        comboUnidades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kilogramo", "Pieza", "Litro" }));
+        comboUnidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kilogramo", "Pieza", "Litro" }));
         comboUnidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboUnidadesActionPerformed(evt);
@@ -415,6 +421,14 @@ public class ProductoFrame extends javax.swing.JDialog {
     private void comboUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboUnidadesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboUnidadesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ProductoFrame articulo = new ProductoFrame(null, true, null, null, "Nuevo Producto", false);
+        articulo.setVisible(true);
+        articulo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        articulo.setLocation(600, 150);
+        articulo.setAlwaysOnTop(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
