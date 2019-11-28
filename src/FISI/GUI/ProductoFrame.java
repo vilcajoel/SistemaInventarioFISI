@@ -423,11 +423,11 @@ public class ProductoFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_comboUnidadesActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ProductoFrame articulo = new ProductoFrame(null, true, null, null, "Nuevo Producto", false);
-        articulo.setVisible(true);
-        articulo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        articulo.setLocation(600, 150);
-        articulo.setAlwaysOnTop(true);
+        CategoriaFrame categoria = new CategoriaFrame(null, true);
+        categoria.setVisible(true);
+        categoria.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        categoria.setLocation(600, 150);
+        categoria.setAlwaysOnTop(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
