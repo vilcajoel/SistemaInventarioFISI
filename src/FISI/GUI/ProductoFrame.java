@@ -377,6 +377,8 @@ public class ProductoFrame extends javax.swing.JDialog {
                     this.dispose();
                 }
             }
+        }
+        else{
             
             if(imgArticleFile == null ){
                 JOptionPane.showMessageDialog(this, "No ha elegido una fotografía de producto");
