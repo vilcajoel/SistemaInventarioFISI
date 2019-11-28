@@ -336,15 +336,29 @@ public class ProductoFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_lblImagenArticuloMousePressed
 
     private void btnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductoActionPerformed
-        String codigo = campoClave.getText().toLowerCase();
-        String nombre = campoNombre.getText().toLowerCase();
-        String descripcion = campoDesc.getText().toLowerCase();
-        double stock = Double.parseDouble(campoStock.getText());
-        double precioCompra = Double.parseDouble(campoPrecioCompra.getText());
-        double precioVenta = Double.parseDouble(campoPrecioVenta.getText());
-        String unidad = comboUnidades.getSelectedItem().toString();
-        CategoriaProd categoria = (CategoriaProd)comboCategorias.getSelectedItem();
-        Proveedor proveedor = (Proveedor)comboProveedores.getSelectedItem();
+        String codigo = null;
+        String nombre = null;
+        String descripcion = null;
+        double stock = 0;
+        String unidad = null;
+        double precioCompra = 0;
+        double precioVenta = 0;
+        CategoriaProd categoria = null;
+        Proveedor proveedor = null;
+        try {
+            codigo = campoClave.getText().toLowerCase();
+            nombre = campoNombre.getText().toLowerCase();
+            descripcion = campoDesc.getText().toLowerCase();
+            stock = Double.parseDouble(campoStock.getText());
+            precioCompra = Double.parseDouble(campoPrecioCompra.getText());
+            precioVenta = Double.parseDouble(campoPrecioVenta.getText());
+            unidad = comboUnidades.getSelectedItem().toString();
+            categoria = (CategoriaProd) comboCategorias.getSelectedItem();
+            proveedor = (Proveedor) comboProveedores.getSelectedItem();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Algo salio mal");
+            this.dispose();
+        }
         
         if(estaActualizando){
             if(imgArticleFile == null){
