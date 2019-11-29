@@ -31,6 +31,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setPreferredSize(new java.awt.Dimension(800, 450));
 
         grupoModulos.add(btnInventarios);
         btnInventarios.setText("Inventarios");
