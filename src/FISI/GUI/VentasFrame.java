@@ -371,7 +371,15 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         
         if(!pagoConStr.isEmpty()){
             double montoPago = Double.parseDouble(pagoConStr);
-            cambio = montoPago - montoVenta;
+            
+            if(montoPago > montoVenta){
+                cambio = montoPago - montoVenta;
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "La venta no procede");
+                this.dispose();
+                return;
+            }
         }
        
         
@@ -393,10 +401,10 @@ public class VentasFrame extends javax.swing.JInternalFrame {
             DetalleVenta detalle = new DetalleVenta(idVenta, idProducto, cantidad);
             base.insertarDetalleVenta(detalle);
             detalles.add(detalle);
-            ArrayList<Producto> listaDeUnProducto =base.obtenerProductosPorCriterio(idProducto);
-            Producto elProducto=listaDeUnProducto.get(0);
-            double existencia=elProducto.getExistenciasProducto();
-            existencia= existencia-1;
+            ArrayList<Producto> listaDeUnProducto = base.obtenerProductosPorCriterio(idProducto);
+            Producto elProducto = listaDeUnProducto.get(0);
+            double existencia = elProducto.getExistenciasProducto();
+            existencia = existencia - 1;
             base.actualizarInventario(elProducto, existencia);
         }
         
@@ -404,7 +412,7 @@ public class VentasFrame extends javax.swing.JInternalFrame {
             modeloTablaProductos.removeRow(i);
         }
         
-        lblSumatoria.setText("0.0");
+        lblSumatoria.setText("0.00");
         
         if(!pagoConStr.isEmpty()){
             JOptionPane.showMessageDialog(this, "<html><h1 style='font-size:200 px; color:blue'>"+cambio+"</h1></html>", "Usted debe dar este cambio:", 1);
