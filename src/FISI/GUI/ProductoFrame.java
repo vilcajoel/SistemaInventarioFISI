@@ -358,20 +358,21 @@ public class ProductoFrame extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Algo salio mal");
             this.dispose();
+            return;
         }
         
         if(estaActualizando){
             if(imgArticleFile == null){
                 Producto producto = new Producto(codigo, nombre, descripcion, 
                     stock, null, unidad, precioCompra, precioVenta, 
-                    0.0, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
+                    stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
                 
                  base.actualizarProducto(producto, false);
             }
             else{
                 Producto producto = new Producto(codigo, nombre, descripcion, 
                     stock, imgArticleFile, unidad, precioCompra, precioVenta, 
-                    0.0, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
+                    stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
                 
                  base.actualizarProducto(producto, true);
             }
@@ -385,12 +386,12 @@ public class ProductoFrame extends javax.swing.JDialog {
             }
             else{
                 if(stock<1){
-                    JOptionPane.showMessageDialog(this, "No hay stock existente");
+                    JOptionPane.showMessageDialog(this, "Stock inexistente");
                 }
                 else{
                     Producto producto = new Producto(codigo, nombre, descripcion, 
                     stock, imgArticleFile, unidad, precioCompra, precioVenta, 
-                    0.0, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
+                    stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
                     base.insertarProducto(producto);
 
                     JOptionPane.showMessageDialog(this, "Se ha guardado el producto");
@@ -405,12 +406,12 @@ public class ProductoFrame extends javax.swing.JDialog {
             }
             else{
                 if(stock<1){
-                    JOptionPane.showMessageDialog(this, "No hay stock existente");
+                    JOptionPane.showMessageDialog(this, "Stock inexistente");
                 }
                 else{
                     Producto producto = new Producto(codigo, nombre, descripcion, 
                     stock, imgArticleFile, unidad, precioCompra, precioVenta, 
-                    0.0, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
+                    stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
                     base.insertarProducto(producto);
 
                     JOptionPane.showMessageDialog(this, "Se ha guardado el producto");

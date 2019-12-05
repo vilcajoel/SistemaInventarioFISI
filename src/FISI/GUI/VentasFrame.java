@@ -378,11 +378,10 @@ public class VentasFrame extends javax.swing.JInternalFrame {
             else{
                 JOptionPane.showMessageDialog(this, "La venta no procede");
                 this.dispose();
-                return;
+                return; //interrumpe toda accion
             }
         }
        
-        
         //Obtenemos la fecha actual y creamos un objeto Date Sql
         Calendar calendarioLocal = Calendar.getInstance();
         java.util.Date fechaActual = calendarioLocal.getTime();
