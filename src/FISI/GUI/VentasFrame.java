@@ -285,12 +285,18 @@ public class VentasFrame extends javax.swing.JInternalFrame {
     
     private void listaBusquedasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaBusquedasMousePressed
         JList list = (JList)evt.getSource();
-        if(evt.getClickCount() == 2){
-            int index = list.locationToIndex(evt.getPoint());
-            Producto prod = (Producto)list.getSelectedValue();
-            anadirProductoAVenta(prod);
-            
-            desplegarFoto(prod);
+        try {
+            if (evt.getClickCount() == 2) {
+                int index = list.locationToIndex(evt.getPoint());
+                Producto prod = (Producto) list.getSelectedValue();
+                if (prod!=null) {
+                    anadirProductoAVenta(prod);
+                    
+                    desplegarFoto(prod);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error en la busqueda");
         }
     }//GEN-LAST:event_listaBusquedasMousePressed
 
@@ -416,7 +422,8 @@ public class VentasFrame extends javax.swing.JInternalFrame {
                 lblSumatoria.setText("0.00");
 
                 if(!pagoConStr.isEmpty()){
-                    JOptionPane.showMessageDialog(this, "<html><h1 style='font-size:200 px; color:blue'>"+cambio+"</h1></html>", "Usted debe dar este cambio:", 1);
+                    JOptionPane.showMessageDialog(this, "<html><h1 style='font-size:200 px; color:blue'>"
+                            +cambio+"</h1></html>", "Usted debe dar este cambio:", 1);
                     campoPagaCon.setText("");
                 }
             }
@@ -430,13 +437,17 @@ public class VentasFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
     private void anadirProductoAVenta(Producto prod){
-        String claveProd = prod.getIdProducto();
-        String nombreProd = prod.getNomProducto();
-        String precioVenta = String.valueOf(prod.getPrecioVentaProducto());
-        String importe = String.valueOf(prod.getPrecioVentaProducto());
-        
-        String [] datosProducto = {claveProd, nombreProd, precioVenta, "1", importe};
-        modeloTablaProductos.addRow(datosProducto);
+        try {
+            String claveProd = prod.getIdProducto();
+            String nombreProd = prod.getNomProducto();
+            String precioVenta = String.valueOf(prod.getPrecioVentaProducto());
+            String importe = String.valueOf(prod.getPrecioVentaProducto());
+            
+            String[] datosProducto = {claveProd, nombreProd, precioVenta, "1", importe};
+            modeloTablaProductos.addRow(datosProducto);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al añadir productos");
+        }
     }
     
     private void limpiarListaProductos(){

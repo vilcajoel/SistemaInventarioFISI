@@ -59,7 +59,7 @@ public class ProductoFrame extends javax.swing.JDialog {
         String clave = producto.getIdProducto();
         String nombre = producto.getNomProducto();
         String descripcion = producto.getDescProducto();
-        double stockRequerido = producto.getStockProducto();
+        double stockActual = producto.getExistenciasProducto();
         String unidad = producto.getUnidadProducto();
         double precioCompra = producto.getPrecioCompraProducto();
         double precioVenta = producto.getPrecioVentaProducto();
@@ -67,7 +67,7 @@ public class ProductoFrame extends javax.swing.JDialog {
         campoClave.setText(clave);
         campoNombre.setText(nombre);
         campoDesc.setText(descripcion);
-        campoStock.setText(String.valueOf(stockRequerido));
+        campoStock.setText(String.valueOf(stockActual));
         comboUnidades.setSelectedItem(unidad);
         campoPrecioCompra.setText(String.valueOf(precioCompra));
         campoPrecioVenta.setText(String.valueOf(precioVenta));
@@ -138,7 +138,7 @@ public class ProductoFrame extends javax.swing.JDialog {
         campoDesc.setRows(5);
         jScrollPane1.setViewportView(campoDesc);
 
-        jLabel3.setText("Stock requerido:");
+        jLabel3.setText("Stock actual:");
 
         jLabel4.setText("Categoria:");
 
@@ -362,42 +362,24 @@ public class ProductoFrame extends javax.swing.JDialog {
         }
         
         if(estaActualizando){
-            if(imgArticleFile == null){
-                Producto producto = new Producto(codigo, nombre, descripcion, 
-                    stock, null, unidad, precioCompra, precioVenta, 
-                    stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
+            Producto producto = null;
+            try {
+                producto = new Producto(codigo, nombre, descripcion,
+                        1, imgArticleFile, unidad, precioCompra, precioVenta,
+                        stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
                 
-                 base.actualizarProducto(producto, false);
-            }
-            else{
-                Producto producto = new Producto(codigo, nombre, descripcion, 
-                    stock, imgArticleFile, unidad, precioCompra, precioVenta, 
-                    stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
+                base.actualizarProducto(producto, true);
+            } catch (Exception e) {
+                producto = new Producto(codigo, nombre, descripcion,
+                        1, imgArticleFile, unidad, precioCompra, precioVenta,
+                        stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
                 
-                 base.actualizarProducto(producto, true);
+                base.actualizarProducto(producto, false);
             }
-            
             JOptionPane.showMessageDialog(this, "Se ha guardado el producto");
+            
             this.dispose();
             informacion = "1";
-            
-            if(imgArticleFile == null ){
-                JOptionPane.showMessageDialog(this, "No ha elegido una fotografía de producto");
-            }
-            else{
-                if(stock<1){
-                    JOptionPane.showMessageDialog(this, "Stock inexistente");
-                }
-                else{
-                    Producto producto = new Producto(codigo, nombre, descripcion, 
-                    stock, imgArticleFile, unidad, precioCompra, precioVenta, 
-                    stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
-                    base.insertarProducto(producto);
-
-                    JOptionPane.showMessageDialog(this, "Se ha guardado el producto");
-                    this.dispose();
-                }
-            }
         }
         else{
             
@@ -410,7 +392,7 @@ public class ProductoFrame extends javax.swing.JDialog {
                 }
                 else{
                     Producto producto = new Producto(codigo, nombre, descripcion, 
-                    stock, imgArticleFile, unidad, precioCompra, precioVenta, 
+                    1, imgArticleFile, unidad, precioCompra, precioVenta, 
                     stock, categoria.getIdCategoriaProd(), proveedor.getIdProveedor());
                     base.insertarProducto(producto);
 
