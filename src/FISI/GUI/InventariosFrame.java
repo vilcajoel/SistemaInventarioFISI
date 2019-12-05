@@ -335,14 +335,21 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
 
     private void btnAgregarExistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarExistenciaActionPerformed
         
-        double existencia = Double.parseDouble(campoAgregarExistencia.getText());
-        double cantidadActual = productoSeleccionado.getExistenciasProducto();
-        double nuevaCantidad = cantidadActual + existencia;
-        base.actualizarInventario(productoSeleccionado, nuevaCantidad);
-        limpiarTabla();
-        cargarModeloTabla();
-        
-        
+        if(campoAgregarExistencia.getText()!=""){
+            try {
+                double existencia = Double.parseDouble(campoAgregarExistencia.getText());
+                double cantidadActual = productoSeleccionado.getExistenciasProducto();
+                double nuevaCantidad = cantidadActual + existencia;
+                base.actualizarInventario(productoSeleccionado, nuevaCantidad);
+                limpiarTabla();
+                cargarModeloTabla();
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Error al agregar");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Error al agregar, no puede estar vacio");
+        }
     }//GEN-LAST:event_btnAgregarExistenciaActionPerformed
 
     private void campoBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyReleased
