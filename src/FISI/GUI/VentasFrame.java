@@ -380,7 +380,7 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         if(!pagoConStr.isEmpty()){
             double montoPago = Double.parseDouble(pagoConStr);
             
-            if(montoPago > montoVenta){
+            if(montoPago >= montoVenta){
                 cambio = montoPago - montoVenta;
                 
                 //Obtenemos la fecha actual y creamos un objeto Date Sql
@@ -429,7 +429,6 @@ public class VentasFrame extends javax.swing.JInternalFrame {
             }
             else{
                 JOptionPane.showMessageDialog(this, "La venta no procede");
-                this.dispose();
             }
         }
        
