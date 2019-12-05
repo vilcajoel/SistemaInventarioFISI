@@ -369,54 +369,64 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         
         double cambio = 0;
         
+        int numRows = modeloTablaProductos.getRowCount();
+        
         if(!pagoConStr.isEmpty()){
             double montoPago = Double.parseDouble(pagoConStr);
             
             if(montoPago > montoVenta){
                 cambio = montoPago - montoVenta;
+                
+                //Obtenemos la fecha actual y creamos un objeto Date Sql
+                Calendar calendarioLocal = Calendar.getInstance();
+                java.util.Date fechaActual = calendarioLocal.getTime();
+                long fechaMilisegundos = fechaActual.getTime();
+                java.sql.Date fecha = new Date(fechaMilisegundos);
+
+                Venta venta = new Venta(montoVenta, fecha);
+                Long idVenta = base.insertarVenta(venta);
+
+                for (int i = 0; i < numRows; i++) {
+                    String idProducto = (String) modeloTablaProductos.getValueAt(i, 0);
+                    String cantidadStr = (String) modeloTablaProductos.getValueAt(i, 3);
+                    double cantidad = Double.parseDouble(cantidadStr);
+                    DetalleVenta detalle = new DetalleVenta(idVenta, idProducto, cantidad);
+                    base.insertarDetalleVenta(detalle);
+                    detalles.add(detalle);
+                    ArrayList<Producto> listaDeUnProducto = base.obtenerProductosPorCriterio(idProducto);
+                    Producto elProducto = listaDeUnProducto.get(0);
+                    double existencia = elProducto.getExistenciasProducto();
+                    double back_ex = existencia;
+                    existencia = existencia - 1;
+                    if(existencia<1){
+                        JOptionPane.showMessageDialog(this, "La venta no procede, las existencias no cubren");
+                        existencia=back_ex;
+                        this.dispose();
+                    }
+                    else{
+                        base.actualizarInventario(elProducto, existencia);
+                    }
+
+                }
+
+                for (int i = numRows-1; i >= 0; i--) {
+                    modeloTablaProductos.removeRow(i);
+                }
+
+                lblSumatoria.setText("0.00");
+
+                if(!pagoConStr.isEmpty()){
+                    JOptionPane.showMessageDialog(this, "<html><h1 style='font-size:200 px; color:blue'>"+cambio+"</h1></html>", "Usted debe dar este cambio:", 1);
+                    campoPagaCon.setText("");
+                }
             }
             else{
                 JOptionPane.showMessageDialog(this, "La venta no procede");
                 this.dispose();
-                return; //interrumpe toda accion
             }
         }
        
-        //Obtenemos la fecha actual y creamos un objeto Date Sql
-        Calendar calendarioLocal = Calendar.getInstance();
-        java.util.Date fechaActual = calendarioLocal.getTime();
-        long fechaMilisegundos = fechaActual.getTime();
-        java.sql.Date fecha = new Date(fechaMilisegundos);
         
-        Venta venta = new Venta(montoVenta, fecha);
-        Long idVenta = base.insertarVenta(venta);
-        
-        int numRows = modeloTablaProductos.getRowCount();
-        
-        for (int i = 0; i < numRows; i++) {
-            String idProducto = (String) modeloTablaProductos.getValueAt(i, 0);
-            String cantidadStr = (String) modeloTablaProductos.getValueAt(i, 3);
-            double cantidad = Double.parseDouble(cantidadStr);
-            DetalleVenta detalle = new DetalleVenta(idVenta, idProducto, cantidad);
-            base.insertarDetalleVenta(detalle);
-            detalles.add(detalle);
-            ArrayList<Producto> listaDeUnProducto = base.obtenerProductosPorCriterio(idProducto);
-            Producto elProducto = listaDeUnProducto.get(0);
-            double existencia = elProducto.getExistenciasProducto();
-            existencia = existencia - 1;
-            base.actualizarInventario(elProducto, existencia);
-        }
-        
-        for (int i = numRows-1; i >= 0; i--) {
-            modeloTablaProductos.removeRow(i);
-        }
-        
-        lblSumatoria.setText("0.00");
-        
-        if(!pagoConStr.isEmpty()){
-            JOptionPane.showMessageDialog(this, "<html><h1 style='font-size:200 px; color:blue'>"+cambio+"</h1></html>", "Usted debe dar este cambio:", 1);
-            campoPagaCon.setText("");
-        }
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
     private void anadirProductoAVenta(Producto prod){

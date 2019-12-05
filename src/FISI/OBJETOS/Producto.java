@@ -20,17 +20,17 @@ public class Producto {
     public Producto(String idProducto, String nomProducto, String descProducto, double stockProducto, 
             File fotoProducto, String unidadProducto, double precioCompraProducto, double precioVentaProducto, 
             double existenciasProducto, int idCategoria, int idProveedor) {
-        this.idProducto = idProducto;
-        this.nomProducto = nomProducto;
-        this.descProducto = descProducto;
-        this.stockProducto = stockProducto;
-        this.fotoProducto = fotoProducto;
-        this.unidadProducto = unidadProducto;
-        this.precioCompraProducto = precioCompraProducto;
-        this.precioVentaProducto = precioVentaProducto;
-        this.existenciasProducto = existenciasProducto;
-        this.idCategoria = idCategoria;
-        this.idProveedor = idProveedor;
+                this.idProducto = idProducto;
+                this.nomProducto = nomProducto;
+                this.descProducto = descProducto;
+                this.stockProducto = stockProducto;
+                this.fotoProducto = fotoProducto;
+                this.unidadProducto = unidadProducto;
+                this.precioCompraProducto = precioCompraProducto;
+                this.precioVentaProducto = precioVentaProducto;
+                this.existenciasProducto = existenciasProducto;
+                this.idCategoria = idCategoria;
+                this.idProveedor = idProveedor;
     }
 
     public double getExistenciasProducto() {

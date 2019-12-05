@@ -316,7 +316,7 @@ public class ProductoFrame extends javax.swing.JDialog {
     private void lblImagenArticuloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImagenArticuloMousePressed
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Archivos de imagen jpg, gif o png", "jpg", "gif", "png");
+            "Archivos de imagen jpg, gif o png", "jpg", "gif", "png", "jpeg");
         chooser.setFileFilter(filter);
         
         int returnVal = chooser.showOpenDialog(this);
@@ -358,7 +358,7 @@ public class ProductoFrame extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Algo salio mal");
             this.dispose();
-            return;
+            return; //interrumpe toda accion
         }
         
         if(estaActualizando){
